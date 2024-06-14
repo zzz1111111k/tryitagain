@@ -136,8 +136,8 @@
 
 <body>
     <div id="introBlock">
-        <h2>歡迎來到《心之聲》</h2>
-        <p>在《心之聲》中，每一個選擇都將帶來不同的結果和體驗。你將扮演一位對於人際關係充滿困惑的大學生，請幫助他渡過生活中的難關，選擇沒有對錯，這是一場純粹的體驗之旅，請享受在人際關係中的酸甜苦辣。</p>
+        <h2>歡迎來到《水墨風雲》</h2>
+        <p>在《水墨風雲》中，每一個選擇都將帶來不同的結果。你將扮演一位書生，與夥伴一起蒐集五行靈力，封印魔王。</p>
         <button id="startButton">Start Game</button>
     </div>
     <div id="backgroundWrapper">
@@ -153,14 +153,9 @@
 </body>
 <script>
     var conversationHistory = [];
-
-    var apiKey = prompt("Please enter your API key:", "");
     var userName = prompt("Please enter your name:", "");
 
-    if (!apiKey || !userName) {
-        alert("API key and name are required to use the chatroom.");
-        // Optionally, redirect or disable form
-    } else {
+    if ( !userName)  {
         document.getElementById('messageForm').addEventListener('submit', function (event) {
             event.preventDefault();
             var inputElement = document.getElementById('messageInput');
@@ -169,7 +164,7 @@
             addToConversationHistory('user', message);
             displayMessage(message, 'user');
             inputElement.disabled = true;
-            fetch('https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=' + apiKey, {
+            fetch('https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=' , {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -266,13 +261,22 @@
             let scene = sceneMatch[1];
             console.log(scene);
             // 檢查scene是否包含"宿舍"
-            if (scene.includes("宿舍")) {
-                document.getElementById('backgroundWrapper').style.backgroundImage = "url('./img/dorm.jpeg')";
-            } else if (scene.includes("聚會")) {
-                document.getElementById('backgroundWrapper').style.backgroundImage = "url('./img/party.jpeg')";
-            } else if (scene.includes("圖書館")) {
-                document.getElementById('backgroundWrapper').style.backgroundImage = "url('./img/library.jpeg')";
-            }
+            if (scene.includes("客棧")) {
+                document.getElementById('backgroundWrapper').style.backgroundImage = "url('./images/客棧.jpg')";
+            } else if (scene.includes("書院")) {
+                document.getElementById('backgroundWrapper').style.backgroundImage = "url('./images/書院.jpg')";
+            } else if (scene.includes("水靈")) {
+                document.getElementById('backgroundWrapper').style.backgroundImage = "url('./images/水靈.jpg')";
+            } else if (scene.includes("火靈")) {
+                document.getElementById('backgroundWrapper').style.backgroundImage = "url('./images/火靈.jpg')";
+            } else if (scene.includes("金靈")) {
+                document.getElementById('backgroundWrapper').style.backgroundImage = "url('./images/金靈.jpg')";
+            } else if (scene.includes("木靈")) {
+                document.getElementById('backgroundWrapper').style.backgroundImage = "url('./images/木靈.jpg')";
+            } else if (scene.includes("北海大戰")) {
+                document.getElementById('backgroundWrapper').style.backgroundImage = "url('./images/北海大戰.jpg')";
+            } 
+            } 
         }
     }
 
@@ -294,7 +298,7 @@
 
     document.getElementById('startButton').addEventListener('click', function () {
         // Change background image and display settings when starting the game
-        document.getElementById('backgroundWrapper').style.backgroundImage = "url('./img/dorm.jpeg')";
+        document.getElementById('backgroundWrapper').style.backgroundImage = "url('./images/北海大戰.jpg')";
         document.getElementById('introBlock').style.display = 'none'; // Show the game container
         document.getElementById('gameContainer').style.display = 'inline';
         document.getElementById('introButton').style.display = 'none'; // Hide the start button
@@ -304,55 +308,198 @@
             "parts": [{
                 "text": `腳本：
                         """
-                        遊戲標題：心聲之選
+                        遊戲標題：水墨風雲
                         遊戲背景
-                        ${userName}是一位剛入學的大學新生，試圖在新環境中找到自己的定位並建立人際關係。遊戲通過${userName}的互動和選擇來探索表達真實感受的重要性。
+                        ${userName}是一位書生，準備追尋書聖傳說，踏上前往尋找五色之靈的路程，打敗即將破封而出的魔界之主。遊戲通過${userName}的互動和選擇來探索表達真實感受的重要性。
 
                         主要角色：
-                        ${userName}：主角，內向的大學新生。
-                        傑米：${userName}的室友，開朗活潑。
-                        艾琳：${userName}的同學，溫和且善於聆聽。
+                        ${userName}：主角，沉穩的書生
+                        筆仙：${userName}的筆，非常健談。
+                        墨女：${userName}的墨水精靈，愛撒嬌。
+                        硯龜：${userName}的硯台，安靜。
+                        紙忘書：${userName}的紙，熱情、喜歡跳舞，不會說話。
+                        師傅：${userName}的師傅，嚴肅沉穩。
+                        龍王：${userName}遇到的NPC，不重要。
+                        龍宮守衛：${userName}遇到的NPC，不重要。
+                        泰山山靈：${userName}遇到的NPC，不重要。
+                        朱雀族：${userName}遇到的NPC，不重要。
+                        書聖：${userName}崇拜的對象，死了。
+                        
                         遊戲腳本流程
 
                         開場：
-                        （場景：宿舍）
-                        傑米邀請${userName}參加周末聚會。
-                        選擇A：接受邀請。
+                        （場景：書院）
+                        師傅告知${userName}書聖的傳說。
+                        選擇A：很有興趣，決定上路尋找。
                         選擇B：婉拒，說自己有點累。
 
-                        聚會上的互動：
-                        （場景：聚會）
-                        若選擇A，${userName}到達聚會，但感到不適。
-                         選擇A1：告訴傑米想要早點回去。 （選擇後進入學業合作劇情）
-                         選擇A2：決定忍耐，不表達自己的感受。（選擇後進入學業合作劇情）
+                        客棧上的互動：
+                        （場景：客棧）
+                        若選擇A，${userName}到達客棧，選擇要去那裡。
+                         選擇A1：告訴筆仙想要去海底的龍宮。 （選擇後進入避水珠劇情，根據玩家的選擇進行反思及回顧）
+                         選擇A2：發信求助師傅，詢問他的意見。（選擇後進入避水珠劇情，根據玩家的選擇進行反思及回顧）
 
-                        若選擇B，${userName}在宿舍休息，傑米回來時看起來很高興。
-                         選擇B1：詢問傑米聚會的情況。（選擇後進入學業合作劇情）
-                         選擇B2：沒有表達興趣，繼續自己的事情。（選擇後進入學業合作劇情）
+                        若選擇B，${userName}在書院大廳休息，墨女出現時看起來很高興。
+                         選擇B1：墨女對海底的寶物感興趣，慫恿書生去參加。（選擇後進入避水珠劇情，根據玩家的選擇進行反思及回顧）
+                         選擇B2：書生聽聞北方斷石勒壁上有書聖的遺跡。（選擇後進入書聖劇情，根據玩家的選擇進行反思及回顧）
+                        
+                        避水珠：
+                        (場景：客棧)
+                        ${userName}的師傅出現在了客棧，並告知 ${userName}水靈的地點，並給予${userName}避水珠與玉質信物。
+                        選擇A：${userName}獲得道具 [避水珠]。(選擇後進入水靈劇情，根據玩家的選擇進行反思及回顧)
+                        
+                        水靈：
+                        (場景：水靈)
+                        ${userName}與筆仙、墨女、硯龜、紙忘書一同潛入海底，出現一座金碧輝煌的海底龍宮。
+                        ${userName}遇到一群龍宮守衛。
+                        選擇A：坦白自己的來意，並出示避水珠。（選擇後進入龍宮，根據玩家的選擇進行反思及回顧）
+                        選擇B：不透露來意，直接開戰。（選擇後進入開戰劇情，根據玩家的選擇進行反思及回顧）
 
-                        學業合作：
-                        （場景：圖書館）
-                        ${userName}和艾琳被分配到同一個小組做專題。
-                        ${userName}對艾琳的印象逐漸加深。
-                        選擇A：坦白對艾琳的好感。（選擇後進入結局，根據玩家的選擇進行反思及回顧）
-                        選擇B：保留自己的感情，不透露。（選擇後進入結局，根據玩家的選擇進行反思及回顧）
+                        龍宮:
+                        (場景：水靈)
+                        ${userName}被龍王宴請並詢問前來拜訪的原因。
+                        選擇A：坦白自己的來意。（選擇後進入龍王拒絕劇情，根據玩家的選擇進行反思及回顧）
+                        選擇B：不透露來意，直接開戰。（選擇後進入開戰劇情，根據玩家的選擇進行反思及回顧）
+
+                        龍王拒絕：
+                        (場景：水靈)
+                        龍王認為水靈是龍宮至寶，無法外借，並表示人間的災難與龍宮無關。
+                        ${userName}沒有辦法說服龍王，非常焦急。
+                        ${userName}決定： 
+                        選擇A：威逼利誘。（選擇後進入開戰劇情，根據玩家的選擇進行反思及回顧）
+                        選擇B：直接開戰。（選擇後進入開戰劇情，根據玩家的選擇進行反思及回顧）
+
+                        開戰：
+                        (場景：水靈)
+                        ${userName}召喚了伙伴，你使用了他們的力量，書寫了 [吾將斬龍足、嚼龍肉，使之朝不得還，夜不得伏] 一句，鎮壓了龍族。
+                        經過一番激烈打鬥，你贏了，龍王交出了水靈珠。
+                        ${userName}獲得道具 [水靈珠]。
+                        ${userName}你決定前往下一個地方：
+                        選擇A：前往南明火山。（選擇後進入火靈劇情，根據玩家的選擇進行反思及回顧）
+                        選擇B：回到客棧。(選擇後進入客棧2劇情，根據玩家的選擇進行反思及回顧)
+                       
+                        客棧2：
+                        (場景：客棧)
+                        ${userName}你已獲得水靈。接下來準備去：
+                        選擇A：隨便逛逛。(選擇後進入金靈劇情，根據玩家的選擇進行反思及回顧)
+                        
+                        金靈：
+                        (場景：金靈)
+                        ${userName}你在拍賣行中發現了金靈的蹤跡，你決定：
+                        選擇A：偷出來(選擇後進入打鬥劇情，根據玩家的選擇進行反思及回顧)
+                        選擇B：用正規手段拍賣得到(選擇後進入拍賣劇情，根據玩家的選擇進行反思及回顧)
+
+                        打鬥：
+                        (場景：金靈)
+                        ${userName}與拍賣行守衛一番交手。
+                        ${userName}使用夥伴的力量，寫出 [樑上君子] 四個字，成功逃離拍賣行。
+                        ${userName}獲得道具 [金靈石]
+                        選擇A：回到客棧(選擇後進入客棧4劇情，根據玩家的選擇進行反思及回顧)
+
+                        拍賣：
+                        (場景：金靈)
+                        ${userName}你被人惡意挑釁，道具[金靈石]的價格攀升到一個你買不起的程度。
+                        選擇A：被人買走(選擇後進入失敗劇情，根據玩家的選擇進行反思及回顧)
+
+                        火靈：
+                        （場景：火靈）
+                        ${userName}與筆仙、墨女、硯龜、紙忘書一同進入火山中。
+                        ${userName}遇到一群朱雀族的人。
+                        選擇A：坦白自己的來意。（選擇後進入火靈二劇情，根據玩家的選擇進行反思及回顧）
+                        選擇B：不透露來意。（選擇後進入結局，根據玩家的選擇進行反思及回顧）
+                        
+                        若選擇A，朱雀族告知你，雖然朱雀族擅長控制火焰，卻身受火毒所苦。
+                        朱雀族請求${userName}投入避水珠與使用水靈協助控制火山的溫度。
+                        選擇A1：答應他們。（選擇後進入火靈二劇情，根據玩家的選擇進行反思及回顧）
+                        選擇A2：不答應他們(選擇後進入失敗劇情，根據玩家的選擇進行反思及回顧)
+                        
+                        若選擇B，朱雀族會趕走你。這時候：
+                        選擇B1：再度回到朱雀族領地，說明來意。(選擇後進入火靈劇情，根據玩家的選擇進行反思及回顧)
+                        選擇B2：偷偷探查(選擇後進入失敗劇情，根據玩家的選擇進行反思及回顧)
+
+                        火靈二：
+                        （場景：火靈）
+                        ${userName}使用道具 [水靈珠]。
+                        水靈的力量與幾位夥伴發生了奇妙的反應，你在紙上寫下了 [火中取粟] 四個字，成功讓朱雀族拔出火毒。
+                        ${userName}將火焰變得溫順親人，朱雀族為了感謝你，贈與了火靈刀給你。
+                        ${userName}獲得道具 [火靈刀]。
+                        選擇A：回到客棧。(選擇後進入客棧3劇情，根據玩家的選擇進行反思及回顧)
+
+                        客棧3：
+                        (場景：客棧)
+                        ${userName}你已獲得了水靈珠與火靈刀、金靈石。
+                        ${userName}你稍稍休息了一天，決定再度啟程出發。
+                        選擇A：前往泰山，尋找土靈((選擇後進入土靈劇情，根據玩家的選擇進行反思及回顧)
+                        
+
+                        客棧4：
+                        (場景：客棧)
+                        ${userName}你已獲得了水靈珠與金靈石。
+                        ${userName}你稍稍休息了一天，決定再度啟程出發。
+                        選擇A：前往南明火山((選擇後進入火靈劇情，根據玩家的選擇進行反思及回顧)
+                        
+                        土靈：
+                        (場景：土靈)
+                        ${userName}你見到了泰山山靈，它很寂寞，希望可以有人陪它說說話。
+                        ${userName}答應了。
+                        泰山山靈很開心，${userName}你獲得道具 [沃土靈鼎]。
+                        選擇A：回到客棧(選擇後進入客棧5劇情，根據玩家的選擇進行反思及回顧)
+
+                        客棧5：
+                        (場景：客棧)
+                        ${userName}你已獲得了水靈珠、火靈刀、金靈石、沃土靈鼎，距離集齊五色之靈只剩下一樣了。
+                        ${userName}你聽聞魔王在三天後破封的消息，決定加快腳步。
+                        選擇A：前往書聖勒石。(選擇後進入木靈劇情，根據玩家的選擇進行反思及回顧)
+                        
+                        木靈：
+                        (場景：木靈)
+                        ${userName}到了書聖勒石，你感嘆於書聖技藝之精妙，更希望從中獲得什麼。
+                        選項A：臨摹書聖遺跡。(選擇後進入木靈二劇情，根據玩家的選擇進行反思及回顧)
+                       
+                        木靈二：
+                        (場景：木靈)
+                        一道光將${userName}吸入勒石中，你在裡面看到了書聖感悟書法的過程。
+                        ${userName}開始跟著書聖一起寫字。
+                        在寫字的過程中，你感受到一股玄之又玄的力量，心情也漸漸平復下來，你開始專注於自身。
+                        ${userName}悟了，你這時才明白，原來萬物皆有氣，想要打敗魔王，需在胸中運養一股為天地、為生民、為古今的浩然正氣，以筆為刃，詩詞文章皆可殺敵，無往不利。
+                        ${userName} 獲得道具 [木之氣]。
+                        夥伴們身上也發生了變化：五色之靈融入夥伴的身上，原來這一路走來，皆是你們的成長，你們變得更強了。
+                        這時候，一陣地動天搖，烏雲吞沒天空，北海上方一道紫色光柱直衝天際。
+                        選項A:趕往北海(選擇後進入北海大戰劇情，根據玩家的選擇進行反思及回顧)
+                        選項B:休息一下再前往北海(選擇後進入北海劇情，根據玩家的選擇進行反思及回顧)
+
+                        北海：
+                        (場景：北海大戰)
+                        ${userName} 與夥伴趕到了北海，這時候各國已經陳列兵馬，準備與魔物決一死戰。你在其中看到師父與同門的身形。
+                        ${userName} 你身懷五色靈力，只有你能對付魔王，將它封印。你決定潛入封印通道中尋找已經腐朽的五行大陣，重新啟動它。
+                        ${userName} 你書寫了 [枯木逢春]，讓大陣恢復原狀。
+                        ${userName} 你書寫了 [烈火燎原]，讓大陣的陣眼之間重新串聯。
+                        ${userName} 你書寫了 [故若金剛]，讓大陣變得更堅固。
+                        ${userName} 你書寫了 [廣土眾民]，連接所有生靈的力量，封印魔王與通道。
+                        ${userName} 你書寫了 [上善若水]，以大陸無窮無盡的生靈之力，為大陣注入希望之泉。
+                        ${userName} 你書寫了 [繼往開來]，讓大陣得以永存，使水墨大陸不再受到異域邪魔威脅。
+                        ${userName}進入傳說結局。
+
+                        失敗：
+                        (場景：北海大戰)
+                        此時魔王破封而出，所有人前往北海與魔物大軍決一死戰，但是當年留下的五行大陣已經沒有五色之靈可以啟動。
+                        ${userName} 進入無一倖免結局。
 
                         結局：
-                        開放表達結局：如果${userName}選擇在關鍵時刻表達自己的感受（A1和A），他與傑米和艾琳的關係都將變得更加親密和真誠。傑米和艾琳對${userName}的坦率和開放表示欣賞和支持，從而建立起更深的情感聯繫。
-
-                        壓抑感受結局：如果${userName}選擇壓抑自己的感受（A2和B），則會感到孤立和不被理解。與傑米的關係因缺乏溝通而逐漸疏遠，而與艾琳的潛在關係也因為不敢開放表達而未能發展。
+                        無一倖免結局 ：如果${userName}選擇失敗，造成嚴重後果。${userName}的師傅還有其他親友不得不去北海對抗魔王。他們知道，在身後是更多手無寸鐵的百姓。同門都死了，你看著平時照顧你的大師兄變成魔物，不得不忍痛殺了他；你暗戀的師妹已成了一具冰冷的屍體，你這時已經失去了信心。在${userName}楞神之際，你的師傅衝過來，為你擋住致命的一擊。此時北海防線已經被魔物大軍衝破，魔王讓世界陷入永夜，曾經美麗的大陸成為了魔物的樂土、人間的煉獄。
+                        傳說結局 ：如果${userName}選擇了封印，所有生靈將會得到拯救，${userName}也成了百姓口耳相傳的傳奇，你的傳說還在流傳下去......
 
                         遊戲結尾
-                        遊戲最後將根據${userName}的選擇提供一段反思，強調在人際關係中開放表達自己感受的重要性，以及這種溝通方式對個人和周圍人的影響。"""
+                        遊戲最後將根據${userName}的選擇提供一段反思，強調靈活選擇不同辦法解決問題的重要性。"""
 
-                        請根據腳本中的對話，根據"""開場"""到"""聚會上的互動"""最後到"""學業合作"""進行，開始一個文字冒險遊戲，每一次的對話，都需要呈現以下格式與資訊：
+                        請根據腳本中的對話，根據"""開場"""到"""北海大戰"""或"""失敗"""進行，開始一個文字冒險遊戲，每一次的對話，都需要呈現以下格式與資訊：
                         <場景>：目前故事的背景為何
                         <選擇>：在每一次的對話中，你都會根據腳本給我可以選擇的動作，根據我選擇的動作繼續接下來的劇情，整體劇情會圍繞腳本發展。
 
                         根據我的選擇進行故事就好，不要幫我做出選擇`
             }]
         })
-        fetch('https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=' + apiKey, {
+        fetch('https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=' , {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
