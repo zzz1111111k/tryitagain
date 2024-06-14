@@ -30,7 +30,7 @@
             display: flex;
             justify-content: center;
             align-items: flex-end;
-            background-image: url('./img/giphy.gif');
+            background-image: url('./images/北海大戰.jpg');
             /* Replace with your image path */
             background-size: contain;
             /* Ensures the image is fully visible without stretching */
@@ -153,9 +153,13 @@
 </body>
 <script>
     var conversationHistory = [];
+    var apiKey = prompt("Please enter your API key:", "");
     var userName = prompt("Please enter your name:", "");
 
-    if ( !userName)  {
+    if  (!apiKey || !userName) {
+        alert("API key and name are required to use the chatroom.");
+        // Optionally, redirect or disable form
+    } else {
         document.getElementById('messageForm').addEventListener('submit', function (event) {
             event.preventDefault();
             var inputElement = document.getElementById('messageInput');
@@ -164,7 +168,7 @@
             addToConversationHistory('user', message);
             displayMessage(message, 'user');
             inputElement.disabled = true;
-            fetch('https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=' , {
+            fetch('https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=' +apiKey, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -278,7 +282,7 @@
             } 
             } 
         }
-    }
+    
 
     function formatText(text) {
         // Replace ** with a new line and bold tag
@@ -335,12 +339,8 @@
                         (場景：客棧)
                         師傅告知${userName}書聖的傳說，並擔憂的表示魔界的魔王將突破封印，讓世界陷入黑暗。
                         ${userName}打算上路去尋找五行靈力。
-                         選擇A：求助師傅，詢問他的意見。（選擇後進入避水珠劇情）
-
-                        避水珠：
-                        (場景：客棧)
                         ${userName}的師傅出掏出一個道具，並告知 ${userName}水靈的地點，並給予${userName}避水珠與玉質信物。
-                        選擇A：${userName}獲得道具 [避水珠]。(選擇後進入水靈劇情)
+                        選擇A：${userName}獲得避水珠。(選擇後進入水靈劇情)
                         
                         水靈：
                         (場景：水靈)
@@ -365,8 +365,7 @@
                         (場景：水靈)
                         ${userName}使用力量，在紙上書寫了 "吾將斬龍足、嚼龍肉，使之朝不得還，夜不得伏"一句話，鎮壓了龍族。
                         經過一番激烈打鬥，${userName}贏了，龍王交出了水靈珠。
-                        ${userName}獲得道具 [水靈珠]。
-                        ${userName}決定前往下一個地方。
+                        ${userName}獲得道具 [水靈珠]。       
                         選擇A：前往南明火山。（選擇後進入火靈劇情，根據玩家的選擇進行反思及回顧）
                         選擇B：回到客棧。(選擇後進入二號劇情，根據玩家的選擇進行反思及回顧)
                        
@@ -483,7 +482,7 @@
                         根據我的選擇進行故事就好，不要幫我做出選擇`
             }]
         })
-        fetch('https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key='+apikey , {
+        fetch('https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key='+ apiKey , {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
